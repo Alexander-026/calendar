@@ -1,0 +1,1 @@
+export  type TLanguages = 'ukr' | 'ru' | 'en' | 'de';

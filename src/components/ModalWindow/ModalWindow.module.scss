@@ -1,0 +1,27 @@
+
+@import '../../styles/mixins.scss';
+body:global(.fixed) {
+   overflow: hidden;
+}
+
+.ModalWindow {
+   position: fixed;
+   z-index: 100;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0, 0, 0, 0.7);
+   overflow-y: auto;
+   // padding: 0 4rem;
+   text-align: center;
+   @include flexbox(flex, center, center);
+}
+
+
+
+.wrapperChildren {
+   position: relative;
+   display: inline-block;
+   // background-color: var(--color-white);
+}

@@ -1,0 +1,27 @@
+@import url('./styles/global.scss');
+
+@mixin theme($bg-color,$color) {
+  .theme-block {
+    background: $bg-color;
+    transition:  background .20s linear;
+  }
+  .theme-color {
+    color: $color;
+    transition: color .40s linear;
+  }
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  font-size: var(--medium);
+}
+
+html[data-theme='dark'] {
+  @include theme(var(--color-dark), var(--color-white))
+}

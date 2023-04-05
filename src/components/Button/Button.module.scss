@@ -1,0 +1,62 @@
+@import "../../styles/mixins.scss";
+
+@mixin button-variant($bgColor, $color, $bgHover, $colorHover, $bgDisabled) {
+  background-color: $bgColor;
+  color: $color;
+  &:hover, &:global(.active) {
+    background-color: $bgHover;
+    color: $colorHover
+  }
+
+  &:disabled {
+    background-color: $bgDisabled;
+    cursor: not-allowed;
+    color: $color;
+  }
+  
+}
+
+.button {
+  position: relative;
+  min-width: 150px;
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+  &Icon {
+    min-width: 10px;
+    min-height: 10px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+  }
+}
+
+
+.button:global(.full) {
+  width: 100%;
+}
+
+
+
+.primary {
+  @include button-variant(
+    var(--color-orange),
+    var(--color-white),
+    var(--color-orange-hover),
+    var(--color-white),
+    var(--color-gray),
+  );
+}
+.secondary {
+  @include button-variant(
+    var(--color-gray-secondary),
+    var(--color-dark-third),
+    var(--color-green-hover),
+    var(--color-white),
+    var(--color-gray),
+  );
+}
+
+

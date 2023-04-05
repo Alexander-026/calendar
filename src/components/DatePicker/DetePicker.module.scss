@@ -1,0 +1,184 @@
+@import "../../styles/mixins.scss";
+.modal,.picker {
+  width: 366px;
+  padding: 20px;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: var(--color-white);
+}
+.picker {
+  .langTheme,
+  .navigation {
+    @include flexbox(flex, space-between, center);
+    margin-bottom: 20px;
+  }
+
+  .langTheme {
+    .langs {
+      border: 0;
+      width: 50px;
+      height: 30px;
+      padding: 5px;
+      border-radius: 4px;
+      &:hover {
+        background-color: var(--color-dark);
+        color: var(--color-white);
+      }
+      cursor: pointer;
+      color: var(--color-dark);
+      &Lang {
+       background-color: var(--color-dark);
+      }
+    }
+    .theme {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .theme:global(.light) {
+      &:hover {
+        * {
+          fill: var(--color-dark);
+        }
+      }
+    }
+    .theme:global(.dark) {
+      * {
+        fill: var(--color-gray);
+      }
+      &:hover {
+        * {
+          fill:  var(--color-gray);
+        }
+      }
+    }
+  }
+
+  .navigation {
+    &CurrentDate {
+      flex: 1;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+
+    &Btns {
+      width: 80px;
+      @include flexbox(flex, space-between, center);
+      gap: 20px;
+      .btn {
+        background: var(--color-gray-secondary);
+        cursor: pointer;
+        border-radius: 4px;
+        width: 30px;
+        height: 30px;
+        @include flexbox(flex, center, center);
+        &:active {
+          background: var(--color-gray);
+        }
+      }
+    }
+  }
+
+  .calendar {
+    &Weeks,
+    &Days {
+      @include flexbox(flex, space-between, center);
+      gap: 20px;
+      &Day {
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        user-select: none;
+      }
+    }
+    &Weeks {
+      margin-bottom: 1rem;
+      &Day {
+        color: var(--color-dark);
+      }
+    }
+
+    &Days {
+      flex-wrap: wrap;
+      &Day {
+        @include flexbox(flex, center, center);
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        color: var(--color-dark-secondary);
+        &::before {
+          position: absolute;
+          content: "";
+          height: 40px;
+          width: 40px;
+          top: 50%;
+          left: 50%;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          z-index: -1;
+        }
+        &:global(.today) {
+          color: var(--color-green);
+        }
+
+        &:global(.dot)::after {
+          position: absolute;
+          content: "";
+          border-radius: 50%;
+          width: 5px;
+          height: 5px;
+          top: -5px;
+          background-color: var(--color-orange);
+        }
+       
+
+        &:hover,&:global(.selected) {
+          &::before {
+            background-color: var(--color-orange);
+          }
+          color: var(--color-white)
+        }
+
+        
+      }
+    }
+  }
+
+  .windows {
+    margin-top: 1rem;
+    @include flexbox(flex, space-between, center);
+    flex-wrap: wrap;
+    gap: 20px;
+    &Btn {
+
+    }
+  }
+
+  &BookedList {
+    margin: 1rem 0;
+    text-align: center;
+    &Item {
+      user-select: none;
+      @include flexbox(flex, center, center);
+      color: var(--color-dark);
+      .delete {
+        color: var(--color-orange);
+        margin-left: 10px;
+        cursor: pointer;
+        display: inline-block;
+      }
+    }
+  }
+
+ 
+}
+
+.modal {
+ &Title {
+  margin-bottom: 20px;
+ }
+ &Btn {
+   margin: 0 5px ;
+ }
+}
