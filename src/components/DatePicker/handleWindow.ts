@@ -5,7 +5,7 @@ export const handleWindow = (
   value: boolean,
   state: IDatePickerState,
   setState: React.Dispatch<React.SetStateAction<IDatePickerState>>
-) => {
+):void => {
   const { windows } = state.selectedDate;
   windows[key].booked = value;
   setState((pre) => {
