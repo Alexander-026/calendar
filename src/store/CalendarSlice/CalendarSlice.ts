@@ -38,10 +38,6 @@ export const initialState: IDatePickerState =    {
 
 
 
-
-console.log('initialState', initialState)
-
-
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState: localState || initialState,

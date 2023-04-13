@@ -7,11 +7,12 @@ import Windows from "./ChildComponents/Windows";
 import i18n from "../../config/i18n";
 import Button from "../Button/Button";
 import { ReactComponent as CheckSVG } from "../../images/check.svg";
-import ModalWindow from "../ModalWindow/ModalWindow";
+import Modal from "../ModalWindow/Modal";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { calendarSlice } from "../../store/CalendarSlice/CalendarSlice";
 import { IDatePickerState, SelectedDate } from "./DatePicker.models";
+
 const hasReserv = (windows:SelectedDate['windows']):boolean => {
   return !!Object.keys(windows).find(
     (w) => windows[w].booked
@@ -29,7 +30,6 @@ const DatePicker = () => {
   }, [dispatch, generateCalendar]);
 
   useEffect(() => {
-    console.log('render')
     refreshDays();
   }, [refreshDays]);
 
@@ -41,7 +41,7 @@ const DatePicker = () => {
       {!!days.length && (
         <>
           {keyForDeleteModal && (
-            <ModalWindow>
+            <Modal>
               <div className={classNames(styles.modal, "theme-block")}>
                 <h5 className={classNames(styles.modalTitle, "theme-color")}>
                   {i18n(lang).calendar.questionDeletion}
@@ -61,7 +61,7 @@ const DatePicker = () => {
                   {i18n(lang).calendar.delete}
                 </Button>
               </div>
-            </ModalWindow>
+            </Modal>
           )}
           <LangTheme />
           <Navigation />
@@ -103,8 +103,8 @@ const DatePicker = () => {
             )}
           </ul>
           <Button
-            disabled={!hasReserv}
-            icon={!!hasReserv && <CheckSVG />}
+            disabled={!hasReserv(selectedDate.windows)}
+            icon={hasReserv(selectedDate.windows) && <CheckSVG />}
             variant="primary"
             full
             onClick={() => dispatch(reserveHandle())}
