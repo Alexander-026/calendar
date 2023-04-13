@@ -1,34 +1,31 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-
+import React, {useMemo, useEffect} from 'react';
+import {createPortal} from "react-dom";
 import styles from "./ModalWindow.module.scss";
+const body: HTMLBodyElement | null = document.querySelector("body");
 
 type ModalWindowProps = {
   children: React.ReactNode;
 };
 
-class ModalWindow extends Component<ModalWindowProps> {
-  private modal: HTMLDivElement = document.createElement("div");
-  private body: HTMLBodyElement | null = document.querySelector("body");
-  public componentDidMount(): void {
-    this.modal.classList.add(styles.ModalWindow);
-    this.body?.classList.add("fixed");
-    document.body.appendChild(this.modal);
-  }
+const ModalWindow:React.FC<ModalWindowProps> = ({children}) => {
+  const modal:HTMLDivElement = useMemo(() =>  document.createElement("div"), [])
+  useEffect(() => {
+    modal.classList.add(styles.ModalWindow)
+    body?.classList.add("fixed")
+    body?.appendChild(modal)
+    return () => {
+      body?.removeChild(modal);
+      body?.classList.remove("fixed");
+    }
+  }, [modal])
 
-  public componentWillUnmount(): void {
-    document.body.removeChild(this.modal);
-    this.body?.classList.remove("fixed");
-  }
-  public render(): React.ReactElement<ModalWindowProps> {
-   const { children} = this.props
-    const wrapperForChildren = (
-      <div className={styles.wrapperChildren}>
-        {children}
-      </div>
-    );
-    return ReactDOM.createPortal(wrapperForChildren, this.modal);
-  }
-}
+  const wrapperForChildren = (
+    <div className={styles.wrapperChildren}>
+      {children}
+    </div>
+  );
+
+  return createPortal(wrapperForChildren, modal)
+};
 
 export default ModalWindow;

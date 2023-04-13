@@ -7,7 +7,7 @@ import Windows from "./ChildComponents/Windows";
 import i18n from "../../config/i18n";
 import Button from "../Button/Button";
 import { ReactComponent as CheckSVG } from "../../images/check.svg";
-import Modal from "../ModalWindow/Modal";
+import ModalWindow from "../ModalWindow/ModalWindow";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { calendarSlice } from "../../store/CalendarSlice/CalendarSlice";
@@ -41,7 +41,7 @@ const DatePicker = () => {
       {!!days.length && (
         <>
           {keyForDeleteModal && (
-            <Modal>
+            <ModalWindow>
               <div className={classNames(styles.modal, "theme-block")}>
                 <h5 className={classNames(styles.modalTitle, "theme-color")}>
                   {i18n(lang).calendar.questionDeletion}
@@ -61,7 +61,7 @@ const DatePicker = () => {
                   {i18n(lang).calendar.delete}
                 </Button>
               </div>
-            </Modal>
+            </ModalWindow>
           )}
           <LangTheme />
           <Navigation />
